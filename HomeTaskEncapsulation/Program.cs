@@ -4,11 +4,15 @@
     {
         static void Main(string[] args)
         {
-            User user = new User();
+            User user = new User("Bakhshalievv","Kamran123",25);
             //user.Age = 25;
             //Console.WriteLine(user.Age);
-            user.Password = "kamran12";
+            Console.WriteLine(user.Name);
             Console.WriteLine(user.Password);
+            Console.WriteLine(user.Age);
+
+
+
         }
     }
 }
