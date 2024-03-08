@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.WebSockets;
-using System.Reflection.Emit;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using System.Net.Http.Headers;
 
 namespace HomeTaskEncapsulation
 {
     internal class User
     {
         string _name;
-        public string Name  { get { return _name; } set {  } } 
-       
+        public string Name  { get { return _name; } set {  } }
+
         string _password;
         public string Password
         {
@@ -24,16 +19,7 @@ namespace HomeTaskEncapsulation
 
             set
             {
-                if (string.IsNullOrEmpty(value) || value.Length < 8) return;
-                //{
-                  //  Console.WriteLine("Sifre bosluqlardan ibaret ola bilmez!");
-                    //return;
-               // }
-                //else if (value.Length < 8)
-                //{
-                //    Console.WriteLine("Sifre 8 herf ve ya reqemden az olmamalidir!");
-                //    return ;
-                //}
+                if (string.IsNullOrEmpty(value) && value.Length < 8) return;
                 if (!(CheckPassword(value))) return;
                 
                 _password = value;
@@ -42,7 +28,6 @@ namespace HomeTaskEncapsulation
 
         } 
         int _age;
-
         public int Age  { 
             
             get
@@ -61,28 +46,33 @@ namespace HomeTaskEncapsulation
             }
         
         }
-        public User(string name,string password,int age)
+        public User(string name,string password)
         {
-            _name = name;
-            _password = password;
-            _age = age;
+            _name=name;
+            Password = password;
+            
         }
+        
+        
+        
         private bool CheckPassword (string password)
-        {   
+        {
+            bool isUpper = false;
+            bool isDigit = false;
             foreach (char item in password)
-            {
+            {  
                 if (char.IsUpper(item))
                 {
-                    return true;
+                    isUpper =true;
                 }
                 {
                  if (char.IsDigit(item))
                     {
-                        return true;    
+                        isDigit = true;    
                     }
                 }
             }
-        return false;
+        return isUpper&&isDigit ;
         }
           
 
